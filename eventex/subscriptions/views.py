@@ -8,9 +8,11 @@ from eventex.subscriptions.models import Subscription
 def subscribe(request):
     if request.method == 'POST':
         form = SubscriptionForm(request.POST)
-        form.is_valid()
-        obj = Subscription(**form.cleaned_data)
-        obj.save()
-        return HttpResponseRedirect('/inscricao/%d/' % obj.pk)
+        if form.is_valid():
+            obj = Subscription(**form.cleaned_data)
+            obj.save()
+            return HttpResponseRedirect('/inscricao/%d/' % obj.pk)
+        else:
+            return render(request, 'subscriptions/subscription_form.html', {'form': form})
     else:
         return render(request, 'subscriptions/subscription_form.html', {'form': SubscriptionForm()})
