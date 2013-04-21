@@ -2,6 +2,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from eventex.subscriptions.forms import SubscriptionForm
+from eventex.subscriptions.models import Subscription
 
 
 def subscribe(request):
@@ -25,4 +26,5 @@ def create(request):
 
 
 def detail(request, pk):
-    return render(request, 'subscriptions/subscription_detail.html')
+    subscription = Subscription.objects.get(pk=pk)
+    return render(request, 'subscriptions/subscription_detail.html', {'subscription': subscription})
