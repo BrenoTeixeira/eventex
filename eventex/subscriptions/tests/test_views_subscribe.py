@@ -73,3 +73,16 @@ class SubscribeInvalidPostTest(TestCase):
         Invalid POST should not redirect.
         """
         self.assertEqual(200, self.resp.status_code)
+
+    def test_form_errors(self):
+        """
+        Form must contain errors.
+        """
+        form = self.resp.context['form']
+        self.assertTrue(form.errors)
+
+    def test_dont_save(self):
+        """
+        Do not save invalid data.
+        """
+        self.assertFalse(Subscription.objects.exists())
