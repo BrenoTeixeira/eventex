@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Subscription(models.Model):
-    name = models.CharField(_('name'), max_length=100)
+    name = models.CharField(_('nome'), max_length=100)
     cpf = models.CharField(_('CPF'), max_length=11, unique=True)
     email = models.EmailField(_('email'), unique=True)
     phone = models.CharField(_('telefone'), max_length=20, blank=True)
